@@ -18,8 +18,8 @@ ToC node layout:
   * Client Package 2 (package level overview page)
   ...
   * Management
-    * Management Package 1
-    * Management Package 2
+    * Management Package 1 (package level overview page)
+    * Management Package 2 (package level overview page)
     ...
 
 .PARAMETER DocRepoLocation
@@ -198,7 +198,6 @@ foreach ($service in $serviceNameList) {
   if ($mgmtItems) {
     $packageItems += [PSCustomObject]@{
       name     = 'Management'
-      href     = "~/docs-ref-services/{moniker}/$serviceReadmeBaseName.md"
       items    = $mgmtItems
     }
   }
