@@ -30,7 +30,8 @@ type QueryOptions struct {
 	EnableScanInQuery bool
 	// ContinuationToken to be used to continue a previous query execution.
 	// Obtained from QueryItemsResponse.ContinuationToken.
-	ContinuationToken string
+	ContinuationToken         string
+	EnableCrosspartitionQuery bool
 }
 
 func (options *QueryOptions) toHeaders() *map[string]string {
@@ -62,6 +63,10 @@ func (options *QueryOptions) toHeaders() *map[string]string {
 
 	if options.ContinuationToken != "" {
 		headers[cosmosHeaderContinuationToken] = options.ContinuationToken
+	}
+
+	if options.EnableCrosspartitionQuery {
+		headers["x-ms-query-enable-crosspartition"] = "true"
 	}
 
 	headers[cosmosHeaderPopulateQueryMetrics] = "true"
