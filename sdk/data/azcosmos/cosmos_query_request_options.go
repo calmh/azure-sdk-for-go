@@ -31,6 +31,8 @@ type QueryOptions struct {
 	// ContinuationToken to be used to continue a previous query execution.
 	// Obtained from QueryItemsResponse.ContinuationToken.
 	ContinuationToken string
+	// EnableCrosspartitionQuery must be set when a query spans partitions
+	EnableCrosspartitionQuery bool
 }
 
 func (options *QueryOptions) toHeaders() *map[string]string {
@@ -62,6 +64,10 @@ func (options *QueryOptions) toHeaders() *map[string]string {
 
 	if options.ContinuationToken != "" {
 		headers[cosmosHeaderContinuationToken] = options.ContinuationToken
+	}
+
+	if options.EnableCrosspartitionQuery {
+		headers[cosmosHeaderEnableCrossPartitionQuery] = "true"
 	}
 
 	headers[cosmosHeaderPopulateQueryMetrics] = "true"
